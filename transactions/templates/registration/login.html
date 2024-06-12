@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+<div class="container bootstrap snippets bootdey">
+  <div class="header">
+    <ul class="nav nav-pills pull-right">
+        <li><a href="{% url 'signup' %}">Ro'yhatdan o'tish</a></li>
+      <li class="active"><a href="{% url 'login' %}">Login</a></li>
+      <li><a href="#">&nbsp;</a></li>
+    </ul>
+    <h3 class="text-muted prj-name">Kirim/Chiqim</h3>
+  </div>
+
+  <div style="height:auto;min-height:300px;" class="jumbotron">
+    <div class="col-md-4">
+       <img class="img-responsive center-block img-user" src="https://bootdey.com/img/Content/Manbrown2.png">
+    </div>
+    <div class="col-md-6 form-content">
+      <form method="post">
+        {% csrf_token %}
+        <h1 class="form-signin-heading text-muted">Login</h1>
+        <input type="text" id="username" autofocus placeholder="Foydalanuvchi nomi" class="form-control" name="username">
+        <input type="password" id="password" placeholder="Parol" class="form-control" name="password">
+        <button type="submit" class="btn btn-lg btn-info btn-block">
+          <i class="fa fa-share"></i>
+          Login
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

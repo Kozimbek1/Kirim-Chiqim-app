@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+
+{% block title %}Ro'yhatdan o'tish{% endblock %}
+
+{% block content %}
+<link href="https://getbootstrap.com/examples/jumbotron-narrow/jumbotron-narrow.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+<div class="container bootstrap snippets bootdey">
+  <div class="header">
+    <ul class="nav nav-pills pull-right">
+      <li class="active"><a href="{% url 'signup' %}">Ro'yhatdan o'tish</a></li>
+      <li><a href="{% url 'login' %}">Login</a></li>
+    </ul>
+    <h3 class="text-muted prj-name">Kirim/Chiqim</h3>
+  </div>
+
+  <div class="jumbotron text-center" style="min-height:400px;height:auto;">
+    <div class="col-md-10 col-md-offset-2">
+        <form class="form-horizontal" role="form" method="POST">
+            {% csrf_token %}
+            <div class="form-group text-center">
+                <div class="col-sm-10 reg-icon">
+                    <span class="fa fa-user fa-3x">Ro'yhatdan o'tish</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-10">
+                    {{ form.username }}
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-10">
+                    {{ form.first_name }}
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-10">
+                    {{ form.last_name }}
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-10">
+                    {{ form.password1 }}
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-10">
+                    {{ form.password2 }}
+                    <h6>Parol kamida 8 belgidan iborat bo'lishi kerak</h6>
+                    <h6>Parolda raqam va harflar qatnshishi lozim</h6>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-10">
+                    <button type="submit" class="btn btn-info">
+                        <span class="glyphicon glyphicon-share-alt"></span>
+                        Ro'yhatdan o'tish
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

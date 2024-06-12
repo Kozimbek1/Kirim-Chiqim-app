@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+
+{% block title %}Bosh sahifa{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/5.3.45/css/materialdesignicons.css" integrity="sha256-NAxhqDvtY0l4xn+YVa6WjAcmd94NNfttjNsDmNatFVc=" crossorigin="anonymous" />
+<section class="section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="candidate-list-widgets mb-4">
+                    {% if request.user.is_authenticated %}
+                        <p class="alert-message">Welcome, {{ request.user.username }}!</p>
+                    {% else %}
+                        <p>Welcome, guest!</p>
+                    {% endif %}
+                    <a class="btn btn-primary" href="{% url 'add_transaction' %}"><i class="uil uil-filter"></i> Kirim/Chiqim qo'shish</a>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="candidate-list">
+                    {% if transactions %}
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Transaction Type</th>
+                                    <th scope="col">Summa</th>
+                                    <th scope="col">Qo'shilgan sana</th>
+                                    <th scope="col">Yangilangan sana</th>
+                                    <th scope="col">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for transaction in transactions %}
+                                    <tr>
+                                        <th scope="row">{{ forloop.counter }}</th>
+                                        <td><span class="font-weight-bold text-primary">{{ transaction.transaction_type }}</span></td>
+                                        <td>{{ transaction.amount }} so'm</td>
+                                        <td>{{ transaction.date_added }}</td>
+                                        <td>{{ transaction.date_modified }}</td>
+                                        <td>
+                                            <a class="btn btn-warning" href="{% url 'edit_transaction' transaction.pk %}">Yangilash</a>
+                                            <a class="btn btn-danger" href="{% url 'delete_transaction' transaction.pk %}">O'chirish</a>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    {% else %}
+                        <div class="text-center">
+                            <p class="alert-message">Kirim/Chiqim mavjud emas.</p>
+                        </div>
+                    {% endif %}
+                </div>
+                <!--end candidate-list-->
+            </div>
+            <!--end col-->
+        </div>
+        <!--end row-->
+    </div>
+    <!--end container-->
+</section>
+
+<style>
+    .alert-message {
+        font-size: 1.5rem;
+        color: #ff6b6b; /* Цвет красный */
+        font-weight: bold;
+    }
+</style>
+
+{% endblock %}
